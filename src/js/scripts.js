@@ -15,6 +15,6 @@ async function getWeather() {
 }
 
 
-// API key a62efa4030ce598957e7558850818388
+
 
 // https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
