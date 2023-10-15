@@ -1,13 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="src/css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito&display=swap"
+      rel="stylesheet"
+    />
     <title>Weather App</title>
-</head>
-<body>
-    <h1>Hello World</h1>
-</body>
+    <script
+      src="https://kit.fontawesome.com/bb8e411a96.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <main>
+      <div class="search-section">
+        <div>
+          <input
+            type="text"
+            class="input-search"
+            placeholder="enter city name"
+          />
+          <button type="button" class="button-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+      </div>
+      <p class="weather-icon">
+        <i class="fa-solid fa-cloud"></i>
+      </p>
+      <div>
+        <p class="degrees">22°</p>
+        <p class="city-name">City Name</p>
+      </div>
+
+      <div class="weather-details">
+        <div class="details__humidity">
+          <i class="fa-solid fa-water"></i>
+          <div>
+            <p id="humidity">50%</p>
+            <p>Humidity</p>
+          </div>
+        </div>
+        <div class="details__wind">
+          <i class="fa-solid fa-wind"></i>
+          <div>
+            <p id="wind">15 km/h</p>
+            <p>Wind Speed</p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
 </html>
 <script src="src/js/scripts.js"></script>
