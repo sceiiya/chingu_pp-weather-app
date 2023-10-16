@@ -11,7 +11,16 @@ body {
   min-height: 100dvh;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
+
+h1{
+  color: rgba(55, 53, 53, 0.889);
+  padding: 20px;
+  top: 10px;
+  font-size: 1.5rem;
+}
+ 
 main {
   background: rgb(58, 180, 170);
   background: linear-gradient(
@@ -80,9 +89,7 @@ main {
   font-size: 2rem;
 }
 
-i,
-p,
-h1 {
+i,p{
   color: whitesmoke;
 }
 
