@@ -1,10 +1,12 @@
 const weatherIcon = document.querySelector('.weather-icon')
-const degrees = document.querySelector('.degrees')  
+const degrees = document.querySelector('.degrees')
 const cityName = document.querySelector('.city-name')
-const humidityVal = document.querySelector('#humidity')
+const humidityVal = document.querySelector('.humidity')
 const inputSearch = document.querySelector('.input-search')
 const buttonSearch = document.querySelector('.button-search')
-const wind = document.querySelector('#wind')
+const wind = document.querySelector('.wind')
+const displayCard = document.querySelector('main')
+
 
 const APIkey = 'a62efa4030ce598957e7558850818388'
 
@@ -16,114 +18,165 @@ async function getWeather(cityName, APIkey) {
     return data
 }
 
-// Kelvin to Celsius: °C = K - 273.15
-// Celsius to Fahrenheit: °F = (°C * 9/5) + 32
+async function getDefWeather(APIkey, lon, lat) {
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${APIkey}&units=metric`
 
-// getWeather(city_Name, APIkey)
-// .then(data => {
-//     const city = data.name
-//     const temp = Math.floor(data.main.temp)
-//     const country = data.sys.country
-//     const windSpd = data.wind.speed
-//     const weather = data.weather.main
-    
-//     console.log(`city  is ${city} /n` + 
-//         `temp is ${temp} /n` +
-//         `country is ${country} /n` +
-//         `windSpd is ${windSpd} /n` +
-//         `weather is ${weather} /n`);
-
-//     degrees.textContent = temp;
-//     cityName.textContent = city;
-    
-// })
-
+    const response = await fetch(apiUrl)
+    const data = await response.json()
+    return data
+}
 
 inputSearch.addEventListener('keypress', (e) => {
-    if(e.key === 'Enter') {
-        // run async function
+    if (e.key === 'Enter') {
         buttonSearch.click()
     }
 })
 buttonSearch.addEventListener('click', async () => {
     try {
         const city_Name = inputSearch.value
-        
+
         getWeather(city_Name, APIkey)
             .then(data => {
-                if (data.cod !== "404"){
-                    
-                    console.log(data)
-                    const city = data.name
-                    const temp = Math.floor(data.main.temp)
-                    const country = data.sys.country
-                    const windSpd = data.wind.speed
-                    // const weather = data.weather.main
-                    const humidity = data.main.humidity
-                    // // const weatherIconCode = data.
-        
-                    // console.log(`city  is ${city} /n` + 
-                    //     `temp is ${temp} /n` +
-                    //     `country is ${country} /n` +
-                    //     `windSpd is ${windSpd} /n` +
-                    //     `weather is ${weather} /n`);
-                    wind.textContent = windSpd + ' km/h'
-                    degrees.textContent = temp + '°C';
-                    cityName.textContent = city + ' | ' + country;
-                    humidityVal.textContent = humidity;
-                    // weatherIcon.src = `https://openweathermap.org/img/wn/${weatherIconCode}.png`
-        
-                switch (data.weather[0].description) {
-                    case 'clear sky':
-                        weatherIcon.src = 'https://openweathermap.org/img/wn/01d@2x.png'
-                        break;
-                    case 'few clouds':
-                        weatherIcon.src = 'https://openweathermap.org/img/wn/02d@2x.png'
-                        break;
-                    case 'scattered clouds':
-                        weatherIcon.src = 'https://openweathermap.org/img/wn/03d@2x.png'
-                        break;
-                    case 'broken clouds':
-                        weatherIcon.src = 'https://openweathermap.org/img/wn/04d@2x.png'
-                        break;
-                    case 'shower rain':
-                        weatherIcon.src = 'https://openweathermap.org/img/wn/09d@2x.png'
-                        break;
-                    case 'rain':
-                        weatherIcon.src = 'https://openweathermap.org/img/wn/10d@2x.png'
-                        break;
-                    case 'thunderstorm':
-                        weatherIcon.src = 'https://openweathermap.org/img/wn/11d@2x.png'
-                        break;
-                    case 'snow':
-                        weatherIcon.src = 'https://openweathermap.org/img/wn/13d@2x.png'
-                        break;
-                    case 'mist':
-                        weatherIcon.src = 'https://openweathermap.org/img/wn/50d@2x.png'
-                        break;
-                    default:
-                        break;
+                if (data.cod === 200) {
+
+                    const { name, sys, wind, main, weather } = data
+
+                    const cityWeather = {
+                        'city': name,
+                        'temp': Math.floor(main.temp),
+                        'country': sys.country,
+                        'wind': wind.speed,
+                        'humidity': main.humidity,
+                        'iconCode': weather[0].icon,
+                    }
+
+                    storeCurrentCity(cityWeather)
+                    appendDOM()
+
+                    // wind.textContent = windSpd + ' km/h'
+                    // degrees.textContent = temp + '°C';
+                    // cityName.textContent = name + ' | ' + country;
+                    // humidityVal.textContent = humidity + '%';
+
+                    // weatherIcon.src = `https://openweathermap.org/img/wn/${weatIcon}@2x.png`
+
+                    inputSearch.value = ''
+                } else {
+                    alert('error')
+                }
+            })
+    } catch (e) {
+        console.error(e)
+    }
+})
+
+function storeDefCity(currentCity) {
+    localStorage.setItem('defaultCity', JSON.stringify(currentCity))
+}
+
+const savedCities = []
+function storeCurrentCity(currentCity) {
+    savedCities.push(currentCity)
+    localStorage.setItem('savedCities', JSON.stringify(savedCities))
+}
+
+console.log(localStorage.getItem('savedCities'))
+
+
+appendDOM()
+
+function appendDOM() {
+    const cityData = JSON.parse(localStorage.getItem('savedCities'))
+    htmlCard = ''
+    for (let i = 0; i < cityData.length; i++) {
+        const card = createCard(cityData[i])
+        htmlCard += card
+    }
+    displayCard.innerHTML = htmlCard
+}
+
+function createCard(element) {
+
+    const { city, temp, country, wind, humidity, iconCode } = element
+
+    // si ia 
+    const htmlCard = `
+    <div class="card">
+    <p>
+      <img
+        class="weather-icon mainIcon"
+        src="https://openweathermap.org/img/wn/${iconCode}@2x.png"
+      />
+    </p>
+    <div>
+      <p class="degrees">${temp}°</p>
+      <p class="city-name">${city} | ${country}</p>
+    </div>
+<div class='weather-details'>
+      <div class="details__humidity">
+        <i class="fa-solid fa-water"></i>
+        <div>
+          <p class="humidity">${humidity}</p>
+         
+        </div>
+      </div>
+      <div class="details__wind">
+        <i class="fa-solid fa-wind"></i>
+        <div>
+          <p class="wind">${wind} km/h</p>
+         
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  `
+
+    return htmlCard
+}
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition)
+    } else {
+        alert("Geolocation is not supported by this browser.")
+    }
+}
+getLocation()
+
+function showPosition(position) {
+    const lat = position.coords.latitude
+    const lon = position.coords.longitude
+    try {
+        getDefWeather(APIkey, lon, lat).then(data => {
+            if (data.cod === 200) {
+
+                const { name, sys, wind, main, weather } = data
+
+                const cityWeather = {
+                    'city': name,
+                    'temp': Math.floor(main.temp),
+                    'country': sys.country,
+                    'wind': wind.speed,
+                    'humidity': main.humidity,
+                    'iconCode': weather[0].icon,
                 }
 
-                inputSearch.value = ''
-            }   else{
+                storeDefCity(cityWeather)
+
+                wind.textContent = cityWeather.wind + ' km/h'
+                degrees.textContent = cityWeather.temp + '°C';
+                cityName.textContent = cityWeather.city + ' | ' + cityWeather.country;
+                humidityVal.textContent = cityWeather.humidity + '%';
+
+                weatherIcon.src = `https://openweathermap.org/img/wn/${cityWeather.iconCode}@2x.png`
+
+            } else {
                 alert('error')
             }
-            })
-    
-    }catch(e){
+        })
+    } catch (e) {
         console.error(e)
     }
 
-    }
-)
-
-// https://openweathermap.org/img/wn/01d.png
-// https://openweathermap.org/weather-conditions
-
-// API key a62efa4030ce598957e7558850818388
-// created by sceiya from vscode live session
-
-
-// https://api.openweathermap.org/data/2.5/weather?q={cityName}&appid={API key}
-
+}
