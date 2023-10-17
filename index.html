@@ -3,17 +3,41 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="A simple weather app that will tell you the present weather of the city you prompr in." />
-    <meta name="keywords" content="weather, weather app, city weather, country weather, storm update, rain update" />
+    <meta
+      name="description"
+      content="A simple weather app that will tell you the present weather of the city you prompr in."
+    />
+    <meta
+      name="keywords"
+      content="weather, weather app, city weather, country weather, storm update, rain update"
+    />
     <meta name="author" content="andreimaier, sceiiya" />
     <link rel="canonical" href="/" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
-    <link rel="manifest" href="/assets/icons/site.webmanifest">
-    <link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff"> 
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/assets/icons/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/assets/icons/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/assets/icons/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/assets/icons/site.webmanifest" />
+    <link
+      rel="mask-icon"
+      href="/assets/icons/safari-pinned-tab.svg"
+      color="#5bbad5"
+    />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
     <link rel="stylesheet" href="src/css/styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -29,7 +53,7 @@
   </head>
   <body>
     <h1>Be Updated with the Current Weather Status in your Area!</h1>
-    <main>
+    <header>
       <div class="search-section">
         <div>
           <input
@@ -44,8 +68,11 @@
         </div>
       </div>
       <p>
-        <!-- <i class="fa-solid fa-cloud"></i> -->
-        <img class="weather-icon" id="mainIcon" src="assets/icons/android-chrome-192x192.png" />
+        <img
+          class="weather-icon"
+          class="mainIcon"
+          src="assets/icons/android-chrome-192x192.png"
+        />
       </p>
       <div>
         <p class="degrees">0°</p>
@@ -56,18 +83,47 @@
         <div class="details__humidity">
           <i class="fa-solid fa-water"></i>
           <div>
-            <p id="humidity">0</p>
-            <!-- <p>Humidity</p> -->
+            <p class="humidity">0</p>
           </div>
         </div>
         <div class="details__wind">
           <i class="fa-solid fa-wind"></i>
           <div>
-            <p id="wind">0 km/h</p>
-            <!-- <p>Wind Speed</p> -->
+            <p class="wind">0 km/h</p>
           </div>
         </div>
       </div>
+    </header>
+
+    <main>
+      <!-- <div class="card">
+        <p>
+          <img
+            class="weather-icon mainIcon"
+            src="assets/icons/android-chrome-192x192.png"
+          />
+        </p>
+        <div>
+          <p class="degrees">0°</p>
+          <p class="city-name">City</p>
+        </div>
+
+          <div class="details__humidity">
+            <i class="fa-solid fa-water"></i>
+            <div>
+              <p class="humidity">0</p>
+            
+            </div>
+          </div>
+          <div class="details__wind">
+            <i class="fa-solid fa-wind"></i>
+            <div>
+              <p class="wind">0 km/h</p>
+           
+            </div>
+          </div>
+        </div>
+      </div> -->
     </main>
   </body>
 </html>

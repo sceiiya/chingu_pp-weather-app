@@ -6,7 +6,6 @@
 
 body {
   font-family: "Nunito", sans-serif;
-  font-family: "nunito";
   display: flex;
   min-height: 100dvh;
   justify-content: center;
@@ -14,14 +13,14 @@ body {
   flex-direction: column;
 }
 
-h1{
+h1 {
   color: rgba(55, 53, 53, 0.889);
   padding: 20px;
   top: 10px;
   font-size: 1.5rem;
 }
- 
-main {
+
+header {
   background: rgb(58, 180, 170);
   background: linear-gradient(
     133deg,
@@ -37,8 +36,22 @@ main {
   gap: 2rem;
 }
 
-.search-section {
+.card {
+  background: rgb(58, 180, 170);
+  background: linear-gradient(
+    133deg,
+    rgba(58, 180, 170, 1) 10%,
+    rgba(124, 69, 252, 1) 100%
+  );
+  max-width: 20rem;
+  text-align: center;
+  padding: 1rem;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
+
 .search-section > div {
   display: flex;
   justify-content: space-between;
@@ -89,10 +102,25 @@ main {
   font-size: 2rem;
 }
 
-i,p{
+i,
+p {
   color: whitesmoke;
 }
 
 .weather-icon {
   text-shadow: 2px 3px 3px rgba(255, 254, 253, 0.7);
+}
+
+/* from JS */
+
+main {
+  margin: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+main > div {
+  width: 15rem;
 }
