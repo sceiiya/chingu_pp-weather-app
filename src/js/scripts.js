@@ -31,6 +31,7 @@ inputSearch.addEventListener('keypress', (e) => {
         buttonSearch.click()
     }
 })
+
 buttonSearch.addEventListener('click', async () => {
     try {
         const city_Name = inputSearch.value
@@ -53,16 +54,9 @@ buttonSearch.addEventListener('click', async () => {
                     storeCurrentCity(cityWeather)
                     appendDOM()
 
-                    // wind.textContent = windSpd + ' km/h'
-                    // degrees.textContent = temp + '°C';
-                    // cityName.textContent = name + ' | ' + country;
-                    // humidityVal.textContent = humidity + '%';
-
-                    // weatherIcon.src = `https://openweathermap.org/img/wn/${weatIcon}@2x.png`
-
                     inputSearch.value = ''
                 } else {
-                    alert('error')
+                    alert('something went wrong!, also kindly check if the spelling of the city is correct!')
                 }
             })
     } catch (e) {
@@ -80,9 +74,6 @@ function storeCurrentCity(currentCity) {
     localStorage.setItem('savedCities', JSON.stringify(savedCities))
 }
 
-console.log(localStorage.getItem('savedCities'))
-
-
 appendDOM()
 
 function appendDOM() {
@@ -99,7 +90,6 @@ function createCard(element) {
 
     const { city, temp, country, wind, humidity, iconCode } = element
 
-    // si ia 
     const htmlCard = `
     <div class="card">
     <p>
@@ -172,7 +162,7 @@ function showPosition(position) {
                 weatherIcon.src = `https://openweathermap.org/img/wn/${cityWeather.iconCode}@2x.png`
 
             } else {
-                alert('error')
+                alert('something went wrong!, also kindly the default weather in display will only work if you gave location permission in your browser!')
             }
         })
     } catch (e) {
